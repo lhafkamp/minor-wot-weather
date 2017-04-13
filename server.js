@@ -20,25 +20,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// request weather data from API
-app.get('/', function(req, res) {
-  request(`https://api.wunderground.com/api/${APIKEY}/conditions/q/autoip.json`, (error, response, body) => {
-    const data = JSON.parse(body);
-    temp = data.current_observation.temp_c;
-  });
-
-  // if the temperature is bigger than 10 store orange, else store blue
-  if (temp > 10) {
-    newColor = 'ffa500';
-  } else {
-    newColor = '1fe3ff';
-  }
-  res.render('index');
-
-  sendColor();
-});
-
-// send data to the buttons
+// function for sending data to the buttons
 function sendColor() {
   request({
     uri: `http://oege.ie.hva.nl/~palr001/icu/api.php`,
@@ -53,6 +35,27 @@ function sendColor() {
     }
   });
 }
+
+// request weather data from API
+app.get('/', function(req, res) {
+  request(`https://api.wunderground.com/api/${APIKEY}/conditions/q/autoip.json`, (error, response, body) => {
+    const data = JSON.parse(body);
+    temp = data.current_observation.temp_c;
+  });
+
+  // if the temperature is bigger than 10 store orange, else store blue
+  if (temp > 18) {
+    newColor = 'ffa500';
+  } else {
+    newColor = '1fe3ff';
+  }
+
+  // render index on '/'
+  res.render('index');
+
+  // run the sendColor function
+  sendColor();
+});
 
 // run on 2500
 const port = process.env.PORT || 2500;

@@ -29,8 +29,6 @@ function sendColor() {
       t: 'sdc',
       d: '71B6',
       td: '71B6',
-      td: 'E568',
-      td: 'C804',
       c: newColor
     }
   });

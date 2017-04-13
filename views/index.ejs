@@ -7,10 +7,62 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
 
-  <title>Spelletje</title>
+  <title>Cross-minor intermezzo</title>
 </head>
 <body>
-<h1>hoi</h1>
+<style>
+	body {
+		<% if (temp > 18) { %>
+			background-image: url(http://www.youwall.com/wallpapers/201211/sunny-forest-road-wallpaper_300d5.jpg);
+			<% } else { %>
+				background-image: url(http://wallpaper-gallery.net/images/download-rain-wallpaper/download-rain-wallpaper-6.jpg);
+		<% } %>
+		background-size: cover;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+	}
+
+	div {
+		opacity: .8;
+		padding: .5em 2em 1.5em 2em;
+		background: black;
+		font-family: "Trebuchet MS", Helvetica, sans-serif;
+		color: white;
+		text-align: center;
+	}
+
+	h1 {
+		font-size: 4em;
+		opacity: .8;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 8em;
+		opacity: 1;
+	}
+
+	p {
+		color: white;
+		font-size: 2em;
+		font-weight: 100;
+		opacity: .5;
+	}
+</style>
+
+	<div>
+		<h1>Cross-minor intermezzo!</h1>
+		<h2><%= temp %>℃</h2>
+		<p>
+			<% if (temp > 18) { %>
+				Tijd om naar buiten te gaan!
+			<% } else { %>
+				Beter dat we binnen blijven..
+			<% } %>
+		</p>
+	</div>
 
 </body>
 </html>

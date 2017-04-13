@@ -28,9 +28,9 @@ function sendColor() {
       t: 'rdc',
       t: 'sdc',
       d: '71B6',
-      td: users[0],
-      td: users[1],
-      td: users[2],
+      td: '71B6',
+      td: 'E568',
+      td: 'C804',
       c: newColor
     }
   });
@@ -41,6 +41,11 @@ app.get('/', function(req, res) {
   request(`https://api.wunderground.com/api/${APIKEY}/conditions/q/autoip.json`, (error, response, body) => {
     const data = JSON.parse(body);
     temp = data.current_observation.temp_c;
+
+     // render index on '/'
+    res.render('index', {
+      temp: temp
+    });
   });
 
   // if the celcius is higher than 18 store orange, else store blue
@@ -49,9 +54,6 @@ app.get('/', function(req, res) {
   } else {
     newColor = '1fe3ff';
   }
-
-  // render index on '/'
-  res.render('index');
 
   // run the sendColor function
   sendColor();

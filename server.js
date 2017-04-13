@@ -2,27 +2,32 @@ const path = require('path');
 const express = require('express');
 const request = require('request');
 
-require('dotenv').config();
-const app = express();
-
+// nodeMCU ID's from Luuk/Sjoerd/Merlijn
 const users = ['71B6', 'E568', 'C804'];
-const randomUser = users[Math.floor(users.length * Math.random())];
-const colors = ['FFFFFF', '9600ff', '00ff2b'];
-const randomColor = colors[Math.floor(colors.length * Math.random())];
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
+// empty variables for later use
 let temp = '';
 let newColor = '';
 
+// env key
+require('dotenv').config();
 const APIKEY = process.env.API_KEY;
 
+// set up express
+const app = express();
+
+// set up views
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// request weather data from API
 app.get('/', function(req, res) {
   request(`https://api.wunderground.com/api/${APIKEY}/conditions/q/autoip.json`, (error, response, body) => {
     const data = JSON.parse(body);
     temp = data.current_observation.temp_c;
   });
+
+  // if the temperature is bigger than 10 store orange, else store blue
   if (temp > 10) {
     newColor = 'ffa500';
   } else {
@@ -33,6 +38,7 @@ app.get('/', function(req, res) {
   sendColor();
 });
 
+// send data to the buttons
 function sendColor() {
   request({
     uri: `http://oege.ie.hva.nl/~palr001/icu/api.php`,
@@ -40,13 +46,15 @@ function sendColor() {
       t: 'rdc',
       t: 'sdc',
       d: '71B6',
-      td: '71B6',
-      m: 'test',
+      td: users[0],
+      td: users[1],
+      td: users[2],
       c: newColor
     }
   });
 }
 
+// run on 2500
 const port = process.env.PORT || 2500;
 
 app.listen(port, function() {

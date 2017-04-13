@@ -43,7 +43,7 @@ app.get('/', function(req, res) {
     temp = data.current_observation.temp_c;
   });
 
-  // if the temperature is bigger than 10 store orange, else store blue
+  // if the celcius is higher than 18 store orange, else store blue
   if (temp > 18) {
     newColor = 'ffa500';
   } else {

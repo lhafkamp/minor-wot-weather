@@ -6,8 +6,8 @@ const request = require('request');
 const users = ['71B6', 'E568', 'C804'];
 
 // empty variables for later use
-let temp = '';
-let newColor = '';
+let temp;
+let newColor;
 
 // env key
 require('dotenv').config();
@@ -27,7 +27,7 @@ function sendColor(user) {
     qs: {
       t: 'rdc',
       t: 'sdc',
-      d: '71B6',
+      d: 'E568',
       td: user,
       c: newColor
     }
@@ -48,9 +48,6 @@ app.get('/', function(req, res) {
 
   // if the celcius is higher than 18 store orange, else store blue
   temp > 18 ? newColor = 'ffa500' : newColor = '1fe3ff';
-
-  // run the sendColor function
-  sendColor();
 
   users.forEach(user => {
     sendColor(user);

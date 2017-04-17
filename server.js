@@ -21,14 +21,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // function for sending data to the buttons
-function sendColor() {
+function sendColor(user) {
   request({
     uri: `http://oege.ie.hva.nl/~palr001/icu/api.php`,
     qs: {
       t: 'rdc',
       t: 'sdc',
       d: '71B6',
-      td: '71B6',
+      td: user,
       c: newColor
     }
   });
@@ -47,14 +47,14 @@ app.get('/', function(req, res) {
   });
 
   // if the celcius is higher than 18 store orange, else store blue
-  if (temp > 18) {
-    newColor = 'ffa500';
-  } else {
-    newColor = '1fe3ff';
-  }
+  temp > 18 ? newColor = 'ffa500' : newColor = '1fe3ff';
 
   // run the sendColor function
   sendColor();
+
+  users.forEach(user => {
+    sendColor(user);
+  });
 });
 
 // run on 2500

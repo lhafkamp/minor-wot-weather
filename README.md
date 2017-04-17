@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="100" src="media/impression.jpg" alt="impression of the online app working together with the NodeMCU">
+  <img width="100%" src="media/impression.jpg" alt="impression of the online app working together with the NodeMCU">
   <br>
   <br>
   minor-wot-weather
@@ -24,10 +24,6 @@ To be continued...
 
 ## Team
 
-![Luuk Hafkamp](https://avatars0.githubusercontent.com/u/14187210?v=3&s=400) |
-![Sjoerd Beentjes](https://avatars3.githubusercontent.com/u/11621275?v=3&s=400) |
-![Merlijn Vos](https://avatars1.githubusercontent.com/u/9060226?v=3&s=460) |
+![Luuk Hafkamp](https://avatars0.githubusercontent.com/u/14187210?v=3&s=400) | ![Sjoerd Beentjes](https://avatars3.githubusercontent.com/u/11621275?v=3&s=400) | ![Merlijn Vos](https://avatars1.githubusercontent.com/u/9060226?v=3&s=460) |
 ---|---|---
-[Luuk Hafkamp](https://github.com/lhafkamp) |
-[Sjoerd Beentjes](https://github.com/Sjoerdbeentjes) |
-[Merlijn Vos](https://github.com/Murderlon) |
+[Luuk Hafkamp](https://github.com/lhafkamp) | [Sjoerd Beentjes](https://github.com/Sjoerdbeentjes) | [Merlijn Vos](https://github.com/Murderlon) |

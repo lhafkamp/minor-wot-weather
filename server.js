@@ -8,7 +8,8 @@ const port = process.env.PORT || 2500
 const APIKEY = process.env.API_KEY
 
 // NodeMCU ID's from Luuk/Sjoerd/Merlijn
-const users = ['71B6', 'E568', 'C804']
+// const users = ['71B6', 'E568', 'C804']
+let users = []
 
 let temp
 let newColor
@@ -65,8 +66,18 @@ app.get('/', (req, res) => {
 })
 
 app.get('/status', (req, res) => {
-  console.log(req.query);
-  res.send('status');
+  const position = users.map(function(x) {return x.id; }).indexOf(req.query.id)
+  const found = users[position]
+
+  if (!found) {
+    users.push(req.query)
+  } else {
+    users[position].status = req.query.status
+  }
+
+  console.log(users);
+
+  res.send('status')
 })
 
 

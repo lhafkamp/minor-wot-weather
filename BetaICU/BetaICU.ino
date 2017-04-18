@@ -176,9 +176,6 @@ void requestMessage()
 }
 
 void setStatus(int status) {
-  bool deviceStatus;
-// 0 = aanwezig
-// 1 = afwezig
   if (status == 0) {
     setAllPixels(255, 0, 0, 1.0);
   } else {

@@ -3,19 +3,15 @@ const express = require('express')
 const request = require('request')
 require('dotenv').config()
 
+const app = express()
+const port = process.env.PORT || 2500
+const APIKEY = process.env.API_KEY
 // NodeMCU ID's from Luuk/Sjoerd/Merlijn
 const users = ['71B6', 'E568', 'C804']
 
-// Empty variables for later use
 let temp
 let newColor
 
-const APIKEY = process.env.API_KEY
-
-// Set up express
-const app = express()
-
-// Set up views
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
@@ -52,9 +48,6 @@ app.get('/', (req, res) => {
     })
   })
 })
-
-// Run on 2500
-const port = process.env.PORT || 2500
 
 app.listen(port, () => {
   console.log('App is running on http://localhost:' + port)

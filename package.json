@@ -17,5 +17,16 @@
     "path": "^0.12.7",
     "request": "^2.81.0",
     "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "xo": "^0.18.1"
+  },
+  "xo": {
+    "semicolon": false,
+    "space": true,
+    "env": [
+      "node",
+      "browser"
+    ]
   }
 }

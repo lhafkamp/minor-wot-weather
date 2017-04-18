@@ -44,13 +44,13 @@ app.get('/', function(req, res) {
     res.render('index', {
       temp: temp
     });
-  });
 
-  // if the celcius is higher than 18 store orange, else store blue
-  temp > 18 ? newColor = 'ffa500' : newColor = '1fe3ff';
+    // if the celcius is higher than 18 store orange, else store blue
+    temp > 18 ? newColor = 'ffa500' : newColor = '1fe3ff';
 
-  users.forEach(user => {
-    sendColor(user);
+    users.forEach(user => {
+      sendColor(user);
+    });
   });
 });
 

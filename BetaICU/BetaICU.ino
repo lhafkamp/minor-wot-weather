@@ -62,6 +62,8 @@ void setup()
   wifiManager.autoConnect(configSSID.c_str());
   fadeBrightness(0, 255, 255, 1.0);
   myServo.attach(SERVO_PIN);
+
+  setStatus(0);
 }
 
 //This method starts an oscillation movement in both the LED and servo
@@ -170,6 +172,24 @@ void requestMessage()
     ESP.reset();
   }
 
+  http.end();
+}
+
+void setStatus(int status) {
+  bool deviceStatus;
+// 0 = aanwezig
+// 1 = afwezig
+  if (status == 0) {
+    setAllPixels(255, 0, 0, 1.0);
+  } else {
+    setAllPixels(0, 255, 0, 1.0);
+  }
+
+  // send HTTP request with status
+  printDebugMessage("Sending button press to server");
+  HTTPClient http;
+  http.begin("http://10e25da9.ngrok.io/status?id=" + chipID + "&status=" + status);
+  uint16_t httpCode = http.GET();
   http.end();
 }
 

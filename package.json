@@ -19,6 +19,7 @@
     "socket.io": "^1.7.3"
   },
   "devDependencies": {
+    "ngrok": "^2.2.6",
     "xo": "^0.18.1"
   },
   "xo": {

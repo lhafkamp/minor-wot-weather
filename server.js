@@ -8,7 +8,6 @@ const port = process.env.PORT || 2500
 const APIKEY = process.env.API_KEY
 
 // NodeMCU ID's from Luuk/Sjoerd/Merlijn
-// const users = ['71B6', 'E568', 'C804']
 let users = []
 
 let temp
@@ -41,10 +40,10 @@ function fetchColor(res) {
     })
 
     // If the celcius is higher than 18 store orange, else store blue
-    temp > 0 ? newColor = 'ffa500' : newColor = '1fe3ff'
+    temp > 10 ? newColor = 'ffa500' : newColor = '1fe3ff'
 
     users.forEach(user => {
-      setColor(user)
+      setColor(user.id)
     })
   })
 }

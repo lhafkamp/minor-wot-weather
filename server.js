@@ -44,31 +44,32 @@ function fetchColor(res) {
     temp > 0 ? newColor = 'ffa500' : newColor = '1fe3ff'
 
     users.forEach(user => {
-      setColor(user);
+      setColor(user)
     })
   })
 }
 
 // Request weather data from API
 app.get('/', (req, res) => {
-  fetchColor(res);
+  fetchColor(res)
 })
 
 app.get('/status', (req, res) => {
-  const position = users.map(function(x) {return x.id; }).indexOf(req.query.id)
+  const position = users.map(function (x) {
+    return x.id
+  }).indexOf(req.query.id)
   const found = users[position]
 
   if (!found) {
     users.push(req.query)
-  } else {
+  } else if (found) {
     users[position].status = req.query.status
   }
 
-  console.log(users);
+  console.log(users)
 
   res.send('status')
 })
-
 
 app.listen(port, () => {
   console.log('App is running on http://localhost:' + port)

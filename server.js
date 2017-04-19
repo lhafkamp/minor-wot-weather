@@ -23,20 +23,9 @@ function setColor(user) {
     uri: `http://oege.ie.hva.nl/~palr001/icu/api.php`,
     qs: {
       t: 'sdc',
-      d: 'E568',
+      d: '71B6',
       td: user,
       c: newColor
-    }
-  })
-}
-
-function clearColor(user) {
-  request({
-    uri: `http://oege.ie.hva.nl/~palr001/icu/api.php`,
-    qs: {
-      t: 'rdc',
-      d: 'E568',
-      td: 'E568'
     }
   })
 }
@@ -52,7 +41,7 @@ function fetchColor(res) {
     })
 
     // If the celcius is higher than 18 store orange, else store blue
-    temp > 18 ? newColor = 'ffa500' : newColor = '1fe3ff'
+    temp > 0 ? newColor = 'ffa500' : newColor = '1fe3ff'
 
     users.forEach(user => {
       setColor(user);

@@ -23,9 +23,13 @@ void printDebugMessage(String message) {
 #endif
 }
 
+// variables will change:
+int buttonState = 0; // variable for reading the pushbutton status
+
 void setup()
 {
   pinMode(BUTTONLOW_PIN, OUTPUT);
+  pinMode(TILT_PIN, INPUT);
 
   digitalWrite(BUTTONLOW_PIN, LOW);
 
@@ -61,7 +65,6 @@ void setup()
 
   wifiManager.autoConnect(configSSID.c_str());
   fadeBrightness(0, 255, 255, 1.0);
-  myServo.attach(SERVO_PIN);
 
   setStatus(0);
 }
@@ -98,8 +101,12 @@ void oscillate(float springConstant, float dampConstant, int c)
   fadeBrightness(red, green, blue, abs(spring.x) / 255.0);
 }
 
+int oldButtonState = digitalRead(TILT_PIN);
+
 void loop()
 {
+  buttonState = digitalRead(TILT_PIN);
+  
   //Check for button press
   if (digitalRead(BUTTON_PIN) == LOW)
   {
@@ -113,6 +120,16 @@ void loop()
     requestMessage();
     oldTime = millis();
   }
+
+  if (oldButtonState != buttonState && buttonState == HIGH) {
+    Serial.println(buttonState);
+    setStatus(buttonState);
+  } else if (oldButtonState != buttonState) {
+    Serial.println(buttonState);
+    setStatus(buttonState);
+  }
+
+  oldButtonState = buttonState;
 }
 
 void sendButtonPress()
@@ -185,7 +202,7 @@ void setStatus(int status) {
   // send HTTP request with status
   printDebugMessage("Sending button press to server");
   HTTPClient http;
-  http.begin("http://10e25da9.ngrok.io/status?id=" + chipID + "&status=" + status);
+  http.begin("http://3c0b1235.ngrok.io/status?id=" + chipID + "&status=" + status);
   uint16_t httpCode = http.GET();
   http.end();
 }

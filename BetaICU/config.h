@@ -6,7 +6,7 @@
 #define LED_PIN     D2
 #define BUTTON_PIN  D1
 #define BUTTONLOW_PIN D0
-#define SERVO_PIN D7
+#define TILT_PIN D7
 
 #define FADEIN_DELAY 5
 #define FADEOUT_DELAY 8

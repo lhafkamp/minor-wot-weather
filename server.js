@@ -9,7 +9,7 @@ const APIKEY = process.env.API_KEY
 
 // NodeMCU ID's from Luuk/Sjoerd/Merlijn
 // const users = ['71B6', 'E568', 'C804']
-let users = []
+const users = []
 
 let temp
 let newColor
@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/status', (req, res) => {
-  const position = users.map(function (x) {
+  const position = users.map(x => {
     return x.id
   }).indexOf(req.query.id)
   const found = users[position]

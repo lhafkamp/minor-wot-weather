@@ -4,6 +4,7 @@
 #define DEBUG_MODE
 #define LED_COUNT    8
 #define LED_PIN     D2
+#define LED_PIN_USER D3
 #define BUTTON_PIN  D1
 #define BUTTONLOW_PIN D0
 #define TILT_PIN D7

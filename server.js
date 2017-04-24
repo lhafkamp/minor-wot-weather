@@ -19,8 +19,26 @@ let newColor
 app.use(express.static(path.join(__dirname, '/public')))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
-
 app.use(express.static('media'))
+
+let intermezzo = false
+let now = new Date()
+let intermezzoNoon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0, 0) - now
+let intermezzo2PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 14, 0, 0, 0) - now
+let intermezzo4PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0, 0, 0) - now
+
+if (intermezzoNoon <= 0) {
+  intermezzoNoon += 86400000 // + 24 hours
+}
+if (intermezzo2PM <= 0) {
+  intermezzo2PM += 86400000
+}
+if (intermezzo4PM <= 0) {
+  intermezzo4PM += 86400000
+}
+setTimeout(() => intermezzo = true, intermezzoNoon)
+setTimeout(() => intermezzo = true, intermezzo2PM)
+setTimeout(() => intermezzo = true, intermezzo4PM)
 
 // Request weather data from API
 app.get('/', (req, res) => {
@@ -43,13 +61,16 @@ app.get('/status', (req, res, next) => {
     users[position].status = req.query.status
     io.sockets.emit('users', {users})
   }
-
   next()
 })
 
 app.get('/users', (req, res, next) => {
-  if (users) {
-    res.send(users.length)
+  if (users && intermezzo === true) {
+    const activeUsers = users.filter(user => user.status === 1)
+    res.send(activeUsers.length)
+    intermezzo = false
+  } else {
+    res.send('-1')
   }
   next()
 })

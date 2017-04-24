@@ -15,6 +15,7 @@ int oldTime = 0;
 int oscillationTime = 500;
 String chipID;
 String serverURL = SERVER_URL;
+String apiURL = API_URL;
 OpenWiFi hotspot;
 
 // will store last time LED was updated
@@ -118,7 +119,7 @@ void loop()
   buttonState = digitalRead(TILT_PIN);
 
   // set color for the participant strip
-  colorLed(255, 255, 0); // yellow
+  setUserLeds(255, 255, 0, 2); // yellow
   
   //Check for button press
   if (digitalRead(BUTTON_PIN) == LOW)
@@ -131,23 +132,24 @@ void loop()
   if (millis() > oldTime + REQUEST_DELAY)
   {
     requestMessage();
+    requestUsers();
     oldTime = millis();
   }
 
   unsigned long currentMillis = millis();
 
-    // if the LED is off turn it on and vice-versa:
-    if (oldButtonState != buttonState && buttonState == HIGH && currentMillis - previousMillis >= interval) {
-      Serial.println(buttonState);
-      setStatus(buttonState);
+  // if the LED is off turn it on and vice-versa:
+  if (oldButtonState != buttonState && buttonState == HIGH && currentMillis - previousMillis >= interval) {
+    Serial.println(buttonState);
+    setStatus(buttonState);
 
-      previousMillis = currentMillis;
-    } else if (oldButtonState != buttonState && currentMillis - previousMillis >= interval) {
-      Serial.println(buttonState);
-      setStatus(buttonState);
+    previousMillis = currentMillis;
+  } else if (oldButtonState != buttonState && currentMillis - previousMillis >= interval) {
+    Serial.println(buttonState);
+    setStatus(buttonState);
 
-      previousMillis = currentMillis;
-    }
+    previousMillis = currentMillis;
+  }
     
   oldButtonState = buttonState;
 }
@@ -212,6 +214,34 @@ void requestMessage()
   http.end();
 }
 
+void requestUsers()
+{
+//Serial.print("requestMessageCalled");
+  hideColor();
+
+  HTTPClient http;
+  String requestString = apiURL + "/users";
+  http.begin(requestString);
+  int httpCode = http.GET();
+  
+  if (httpCode == 200)
+  {
+    String response;
+    
+    response = http.getString();
+    
+    if (response.toInt() > -1) {
+      setUserLeds(255, 255, 0, response.toInt());
+    }
+  }
+  else
+  {
+    ESP.reset();
+  }
+
+  http.end();
+}
+
 void setStatus(int status) {
   if (status == 0) {
     setAllPixels(255, 0, 0, 1.0);
@@ -222,7 +252,7 @@ void setStatus(int status) {
   // send HTTP request with status
   printDebugMessage("Sending button press to server");
   HTTPClient http;
-  http.begin("http://c5ee4a93.ngrok.io/status?id=" + chipID + "&status=" + status);
+  http.begin(apiURL + "/status?id=" + chipID + "&status=" + status);
   uint16_t httpCode = http.GET();
   http.end();
 }

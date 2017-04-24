@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-  <metereta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Cross-minor intermezzo</title>
@@ -11,9 +11,9 @@
 <style>
   body {
     <% if (temp > 18) { %>
-      background-image: url(http://www.youwall.com/wallpapers/201211/sunny-forest-road-wallpaper_300d5.jpg);
+      background-image: url('/zon.jpg');
       <% } else { %>
-        background-image: url(http://wallpaper-gallery.net/images/download-rain-wallpaper/download-rain-wallpaper-6.jpg);
+        background-image: url('/regen.jpg');
     <% } %>
     background-size: cover;
     display: flex;
@@ -48,6 +48,11 @@
     font-weight: 100;
     opacity: .5;
   }
+
+  body {
+    display: flex;
+    flex-direction: row;
+  }
 </style>
 
   <div>
@@ -60,6 +65,15 @@
         Beter dat we binnen blijven..
       <% } %>
     </p>
+  </div>
+
+  <div class="users">
+    <ul>
+      <li>E554</li>
+      <li>E554</li>
+      <li>E554</li>
+      <li>E554</li>
+    </ul>
   </div>
 </body>
 </html>

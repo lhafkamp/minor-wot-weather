@@ -17,6 +17,12 @@ String chipID;
 String serverURL = SERVER_URL;
 OpenWiFi hotspot;
 
+// will store last time LED was updated
+unsigned long previousMillis = 0;
+
+// constants won't change :
+const long interval = 750;
+
 void printDebugMessage(String message) {
 #ifdef DEBUG_MODE
   Serial.println(String(PROJECT_SHORT_NAME) + ": " + message);
@@ -121,14 +127,21 @@ void loop()
     oldTime = millis();
   }
 
-  if (oldButtonState != buttonState && buttonState == HIGH) {
-    Serial.println(buttonState);
-    setStatus(buttonState);
-  } else if (oldButtonState != buttonState) {
-    Serial.println(buttonState);
-    setStatus(buttonState);
-  }
+  unsigned long currentMillis = millis();
 
+    // if the LED is off turn it on and vice-versa:
+    if (oldButtonState != buttonState && buttonState == HIGH && currentMillis - previousMillis >= interval) {
+      Serial.println(buttonState);
+      setStatus(buttonState);
+
+      previousMillis = currentMillis;
+    } else if (oldButtonState != buttonState && currentMillis - previousMillis >= interval) {
+      Serial.println(buttonState);
+      setStatus(buttonState);
+
+      previousMillis = currentMillis;
+    }
+    
   oldButtonState = buttonState;
 }
 
@@ -202,7 +215,7 @@ void setStatus(int status) {
   // send HTTP request with status
   printDebugMessage("Sending button press to server");
   HTTPClient http;
-  http.begin("http://3c0b1235.ngrok.io/status?id=" + chipID + "&status=" + status);
+  http.begin("http://0b0bb85b.ngrok.io/status?id=" + chipID + "&status=" + status);
   uint16_t httpCode = http.GET();
   http.end();
 }

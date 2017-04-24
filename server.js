@@ -20,6 +20,8 @@ app.use(express.static(path.join(__dirname, '/public')))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
+app.use(express.static('media'))
+
 // Request weather data from API
 app.get('/', (req, res) => {
   fetchColor()
@@ -89,7 +91,7 @@ function fetchColor() {
     temp > 0 ? newColor = 'ffa500' : newColor = '1fe3ff'
 
     users.forEach(user => {
-      setColor(user)
+      setColor(user.id)
     })
   })
 }

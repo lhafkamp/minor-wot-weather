@@ -6,22 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Cross-minor intermezzo</title>
   <script defer src="/build/index.bundle.js"></script>
+
+  <style>
+    body {
+      <% if (temp > 18) { %>
+        background-image: url('/zon.jpg');
+        <% } else { %>
+          background-image: url('/regen.jpg');
+      <% } %>
+    }
+  </style>
+
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<style>
-  body {
-    <% if (temp > 18) { %>
-      background-image: url('/zon.jpg');
-      <% } else { %>
-        background-image: url('/regen.jpg');
-    <% } %>
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-</style>
 
   <main>
     <section clas="temperature">

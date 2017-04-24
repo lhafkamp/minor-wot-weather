@@ -68,7 +68,7 @@ app.get('/status', (req, res, next) => {
 })
 
 app.get('/users', (req, res, next) => {
-  if (users && intermezzo === true) {
+  if (intermezzo === true) {
     const activeUsers = users.filter(user => user.status === 1)
     res.send(activeUsers.length)
     intermezzo = false

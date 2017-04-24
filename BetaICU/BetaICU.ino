@@ -38,6 +38,10 @@ void setup()
   strip.setBrightness(255);
   setAllPixels(0, 255, 255, 1.0);
 
+  userStrip.begin();
+  userStrip.show(); // Initialize all pixels to 'off'
+  userStrip.setBrightness(40);
+
   WiFiManager wifiManager;
   int counter = 0;
 
@@ -106,6 +110,9 @@ int oldButtonState = digitalRead(TILT_PIN);
 void loop()
 {
   buttonState = digitalRead(TILT_PIN);
+
+  // set color for the participant strip
+  colorLed(255, 255, 0); // yellow
   
   //Check for button press
   if (digitalRead(BUTTON_PIN) == LOW)

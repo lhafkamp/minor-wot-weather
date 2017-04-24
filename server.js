@@ -72,7 +72,7 @@ app.get('/users', (req, res) => {
     return user.status === '1'
   })
 
-  res.send(activeUsers.length.toString())
+  res.send((activeUsers.length - 1).toString())
 })
 
 app.get('*', (req, res) => {

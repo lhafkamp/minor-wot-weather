@@ -13,9 +13,9 @@
 #define FADEOUT_DELAY 8
 
 #define PROJECT_SHORT_NAME "ICU"
-#define REQUEST_DELAY 2000
+#define REQUEST_DELAY 10000
 
-#define API_URL "http://4d6cd23c.ngrok.io"
+#define API_URL "http://cae78a01.ngrok.io"
 #define SERVER_URL "http://oege.ie.hva.nl/~palr001/icu"
 #define CONFIG_SSID "icu"
 

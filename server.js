@@ -68,15 +68,11 @@ app.get('/status', (req, res, next) => {
 })
 
 app.get('/users', (req, res) => {
-  // if (intermezzo === true) {
-    const activeUsers = users.filter(user => user.status === 1)
-    res.send(activeUsers.length.toString())
-    intermezzo = false
-  // } else {
-    // The server successfully processed the request
-    // and is not returning any content.
-    // res.send(204)
-  // }
+  const activeUsers = users.filter(user => {
+    return user.status === '1'
+  })
+
+  res.send(activeUsers.length.toString())
 })
 
 app.get('*', (req, res) => {

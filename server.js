@@ -41,10 +41,14 @@ app.use(express.static('media'))
 
 // Request weather data from API
 app.get('/', (req, res) => {
-  fetchColor()
-  res.render('index', {
-    temp
-  })
+  function callback() {
+    res.render('index', {
+      temp,
+      users
+    })
+  }
+
+  fetchColor(callback)
 })
 
 app.get('/status', (req, res, next) => {
@@ -104,7 +108,7 @@ function setColor(user) {
   })
 }
 
-function fetchColor() {
+function fetchColor(callback) {
   request(`https://api.wunderground.com/api/${APIKEY}/conditions/q/autoip.json`, (error, response, body) => {
     const data = JSON.parse(body)
     temp = data.current_observation.temp_c
@@ -115,5 +119,7 @@ function fetchColor() {
     users.forEach(user => {
       setColor(user.id)
     })
+
+    callback()
   })
 }

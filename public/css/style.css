@@ -1,3 +1,19 @@
+body {
+  display: flex;
+  flex-direction: row;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
 section {
   opacity: .8;
   padding: .5em 2em 1.5em 2em;
@@ -25,12 +41,34 @@ p {
   opacity: .5;
 }
 
-body {
+.temperature {
   display: flex;
-  flex-direction: row;
-  background-size: cover;
-  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+}
+
+.users {
+  flex-basis: 20em;
+  height: 70vh;
+  overflow: scroll;
+}
+
+.users li {
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.users li:last-of-type {
+  margin-bottom: 0;
+}
+
+.users li.present {
+  border: 1px solid #2ecc71;
+  color: #2ecc71;
+}
+
+.users li.not-present {
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
 }

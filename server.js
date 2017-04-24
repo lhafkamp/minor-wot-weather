@@ -15,12 +15,6 @@ const connections = []
 
 let temp
 let newColor
-
-app.use(express.static(path.join(__dirname, '/public')))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
-app.use(express.static('media'))
-
 let intermezzo = false
 let now = new Date()
 let intermezzoNoon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0, 0) - now
@@ -39,6 +33,11 @@ if (intermezzo4PM <= 0) {
 setTimeout(() => intermezzo = true, intermezzoNoon)
 setTimeout(() => intermezzo = true, intermezzo2PM)
 setTimeout(() => intermezzo = true, intermezzo4PM)
+
+app.use(express.static(path.join(__dirname, '/public')))
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
+app.use(express.static('media'))
 
 // Request weather data from API
 app.get('/', (req, res) => {

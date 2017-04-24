@@ -216,27 +216,29 @@ void requestMessage()
 
 void requestUsers()
 {
-//Serial.print("requestMessageCalled");
-  hideColor();
-
   HTTPClient http;
   String requestString = apiURL + "/users";
   http.begin(requestString);
   int httpCode = http.GET();
+
+  Serial.println(apiURL + "/users");
+  Serial.println(httpCode);
   
-  if (httpCode == 200)
+  if (httpCode == 204)
+  {
+    Serial.println("geen data");
+    setUserLeds(255, 255, 0, -1);
+  }
+  else
   {
     String response;
     
     response = http.getString();
     
-    if (response.toInt() > -1) {
-      setUserLeds(255, 255, 0, response.toInt());
-    }
-  }
-  else
-  {
-    ESP.reset();
+    setUserLeds(255, 255, 0, response.toInt());  
+
+    Serial.println("DATAAAAA");
+    Serial.println(response);
   }
 
   http.end();

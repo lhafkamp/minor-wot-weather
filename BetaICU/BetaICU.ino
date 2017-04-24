@@ -215,7 +215,7 @@ void setStatus(int status) {
   // send HTTP request with status
   printDebugMessage("Sending button press to server");
   HTTPClient http;
-  http.begin("http://0b0bb85b.ngrok.io/status?id=" + chipID + "&status=" + status);
+  http.begin("http://c5ee4a93.ngrok.io/status?id=" + chipID + "&status=" + status);
   uint16_t httpCode = http.GET();
   http.end();
 }

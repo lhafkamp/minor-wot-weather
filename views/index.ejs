@@ -21,59 +21,29 @@
     align-items: center;
     height: 100vh;
   }
-
-  div {
-    opacity: .8;
-    padding: .5em 2em 1.5em 2em;
-    background: black;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    color: white;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 4em;
-    opacity: .8;
-  }
-
-  h2 {
-    margin: 0;
-    font-size: 8em;
-    opacity: 1;
-  }
-
-  p {
-    color: white;
-    font-size: 2em;
-    font-weight: 100;
-    opacity: .5;
-  }
-
-  body {
-    display: flex;
-    flex-direction: row;
-  }
 </style>
 
-  <div>
-    <h1>Cross-minor intermezzo!</h1>
-    <h2><%= temp %>℃</h2>
-    <p>
-      <% if (temp > 18) { %>
-        Tijd om naar buiten te gaan!
-      <% } else { %>
-        Beter dat we binnen blijven..
-      <% } %>
-    </p>
-  </div>
+  <main>
+    <section clas="temperature">
+      <h1>Cross-minor intermezzo!</h1>
+      <h2><%= temp %>℃</h2>
+      <p>
+        <% if (temp > 18) { %>
+          Tijd om naar buiten te gaan!
+        <% } else { %>
+          Beter dat we binnen blijven..
+        <% } %>
+      </p>
+    </div>
 
-  <div class="users">
-    <ul>
-      <li>E554</li>
-      <li>E554</li>
-      <li>E554</li>
-      <li>E554</li>
-    </ul>
-  </div>
+    <section class="users">
+      <ul>
+        <li>E554</li>
+        <li>E554</li>
+        <li>E554</li>
+        <li>E554</li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>

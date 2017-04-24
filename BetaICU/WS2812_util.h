@@ -36,4 +36,20 @@ void fadeBrightness(uint8_t r, uint8_t g, uint8_t b, float currentBrightness)
     hideColor();
 }
 
+//////////////////////////////////////
+// new strip for counting participants
+//////////////////////////////////////
+
+Adafruit_NeoPixel userStrip = Adafruit_NeoPixel(8, LED_PIN_USER, NEO_GRB + NEO_KHZ800);
+
+int userCount = 2;
+
+void colorLed(short r, short g, short b) {
+    for(uint16_t i = 0; i <= userCount; i++) {
+      userStrip.setPixelColor(i, r, g, b);
+      userStrip.show();
+      
+      delay(50); 
+    }
+}
 

@@ -1,12 +1,12 @@
 const path = require('path')
-const Server = require('http').Server
+const http = require('http').Server
 const express = require('express')
 const socketio = require('socket.io')
 const request = require('request')
 require('dotenv').config()
 
 const app = express()
-const server = Server(app)
+const server = http(app)
 const io = socketio(server)
 const port = process.env.PORT || 2500
 const APIKEY = process.env.API_KEY
@@ -38,14 +38,19 @@ app.get('/status', (req, res, next) => {
 
   if (!found) {
     users.push(req.query)
-    console.log(users)
     io.sockets.emit('users', {users})
   } else if (found) {
     users[position].status = req.query.status
-    console.log(users)
     io.sockets.emit('users', {users})
   }
 
+  next()
+})
+
+app.get('/users', (req, res, next) => {
+  if (users) {
+    res.send(users.length)
+  }
   next()
 })
 
@@ -58,8 +63,6 @@ io.on('connection', socket => {
   console.log('Connected: %s sockets connected', connections.length)
 
   socket.on('disconnect', () => {
-    // users.splice(users.indexOf(socket.username), 1)
-
     connections.splice(connections.indexOf(socket), 1)
     console.log('Disconnected: %s sockets connected', connections.length)
   })
@@ -69,13 +72,12 @@ server.listen(port, () => {
   console.log('App is running on http://localhost:' + port)
 })
 
-// Function for sending data to the buttons
 function setColor(user) {
   request({
     uri: `http://oege.ie.hva.nl/~palr001/icu/api.php`,
     qs: {
       t: 'sdc',
-      d: '71B6',
+      d: 'E568',
       td: user,
       c: newColor
     }
@@ -88,7 +90,7 @@ function fetchColor() {
     temp = data.current_observation.temp_c
 
     // If the celcius is higher than 18 store orange, else store blue
-    temp > 0 ? newColor = 'ffa500' : newColor = '1fe3ff'
+    temp > 18 ? newColor = 'ffa500' : newColor = '1fe3ff'
 
     users.forEach(user => {
       setColor(user.id)

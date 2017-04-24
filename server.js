@@ -26,7 +26,8 @@ app.use(express.static('media'))
 app.get('/', (req, res) => {
   fetchColor()
   res.render('index', {
-    temp
+    temp,
+    users
   })
 })
 

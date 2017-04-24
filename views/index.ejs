@@ -22,7 +22,7 @@
 <body>
 
   <main>
-    <section clas="temperature">
+    <section class="temperature">
       <h1>Cross-minor intermezzo!</h1>
       <h2><%= temp %>℃</h2>
       <p>
@@ -32,14 +32,13 @@
           Beter dat we binnen blijven..
         <% } %>
       </p>
-    </div>
+    </section>
 
     <section class="users">
       <ul>
-        <li>E554</li>
-        <li>E554</li>
-        <li>E554</li>
-        <li>E554</li>
+        <% users.forEach(user => { %>
+          <li class="<%= user.status === '1' ? 'present' : 'not-present' %>"><%= user.id %></li>
+        <% }) %>
       </ul>
     </section>
   </main>

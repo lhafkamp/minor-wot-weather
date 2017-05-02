@@ -6,39 +6,59 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Cross-minor intermezzo</title>
   <script defer src="/build/index.bundle.js"></script>
-
-  <style>
-    body {
-      <% if (temp > 18) { %>
-        background-image: url('/zon.jpg');
-        <% } else { %>
-          background-image: url('/regen.jpg');
-      <% } %>
-    }
-  </style>
-
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/animated-icons.css">
 </head>
 <body>
-
   <main>
-    <section class="temperature">
-      <h1>Cross-minor intermezzo!</h1>
-      <h2><%= temp %>℃</h2>
-      <p>
-        <% if (temp > 18) { %>
-          Tijd om naar buiten te gaan!
-        <% } else { %>
-          Beter dat we binnen blijven..
-        <% } %>
-      </p>
+    <section>
+      <h1>Cross-minor intermezzo's <br> 12:00 | 14:00 | 16:00</h1>
     </section>
+    <section>
+      <h2>Amsterdam, Nederland</h2>
+      <div class="weather">
+        <h3><%= temp %><span class="degree-symbol">°</span>C</h3>
+        <% if (icon === 'clear-day') { %>
+          <div class="icon sunny">
+            <div class="sun">
+                <div class="rays"></div>
+            </div>
+          </div>
+        <% } else if (icon === 'snow') { %>
+          <div class="icon flurries">
+            <div class="cloud"></div>
+            <div class="snow">
+              <div class="flake"></div>
+              <div class="flake"></div>
+            </div>
+          </div>
+        <% } else if (icon === 'cloudy') {%>
+          <div class="icon cloudy">
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+          </div>
+        <% } else if (icon === 'sleet') {%>
+          <div class="icon thunder-storm">
+            <div class="cloud"></div>
+            <div class="lightning">
+              <div class="bolt"></div>
+              <div class="bolt"></div>
+            </div>
+          </div>
+        <% } else if (icon === 'rain') {%>
+          <div class="icon rainy">
+            <div class="cloud"></div>
+            <div class="rain"></div>
+          </div>
+        <% } else {%>
+          <div class="icon cloudy">
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+          </div>
+        <% } %>
+      </div>
+      <ul class="users">
 
-    <section class="users">
-      <ul>
-        <% users.forEach(user => { %>
-          <li class="<%= user.status === '1' ? 'present' : 'not-present' %>"><%= user.id %></li>
-        <% }) %>
       </ul>
     </section>
   </main>

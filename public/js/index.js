@@ -35,7 +35,7 @@
             name
           })
 
-          name === '' ? el.innerHTML = id : el.innerHTML = name
+          name === '' ? el.innerHTML = id : el.innerHTML = `${name} (${id})`
         }
       })
     }

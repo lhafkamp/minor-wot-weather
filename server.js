@@ -18,10 +18,14 @@ let weather
 let newColor
 let intermezzo = false
 let now = new Date()
+
+// Times on which the intermezzos are planned
+// Format: hours, minutes, seconds, milliseconds
 let intermezzoNoon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 13, 17, 0, 0) - now
 let intermezzo2PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15, 23, 0, 0) - now
 let intermezzo4PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0, 0, 0) - now
 
+// After the intermezzo, set the timer for the next day
 if (intermezzoNoon <= 0) {
   intermezzoNoon += 86400000 // + 24 hours
 }
@@ -31,6 +35,8 @@ if (intermezzo2PM <= 0) {
 if (intermezzo4PM <= 0) {
   intermezzo4PM += 86400000
 }
+
+// Set the timers
 setTimeout(() => intermezzo = true, intermezzoNoon)
 setTimeout(() => intermezzo = true, intermezzo2PM)
 setTimeout(() => intermezzo = true, intermezzo4PM)
@@ -52,6 +58,7 @@ app.get('/', (req, res) => {
   fetchColor(callback)
 })
 
+// Endpoint to be triggered by a box to pass through its status
 app.get('/status', (req, res, next) => {
   const position = users.map(x => {
     return x.id
@@ -68,6 +75,7 @@ app.get('/status', (req, res, next) => {
   next()
 })
 
+// Endpoint to be triggered by a box to get the user count
 app.get('/users', (req, res) => {
   const activeUsers = users.filter(user => {
     return user.status === '1'
@@ -80,6 +88,7 @@ app.get('*', (req, res) => {
   res.redirect('/')
 })
 
+// Socket.io stuff
 io.on('connection', socket => {
   connections.push(socket)
   console.log('Connected: %s sockets connected', connections.length)
@@ -89,6 +98,7 @@ io.on('connection', socket => {
     console.log('Disconnected: %s sockets connected', connections.length)
   })
 
+  // When a user changes the name in the view, add it to the correct user in the users array
   socket.on('nameChange', data => {
     users.forEach(user => {
       if (user.id === data.id) {
@@ -96,10 +106,6 @@ io.on('connection', socket => {
       }
     })
   })
-})
-
-server.listen(port, () => {
-  console.log('App is running on http://localhost:' + port)
 })
 
 function setColor(user) {
@@ -136,3 +142,7 @@ function fetchColor(callback) {
     callback()
   })
 }
+
+server.listen(port, () => {
+  console.log('App is running on http://localhost:' + port)
+})

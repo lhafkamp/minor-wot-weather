@@ -21,9 +21,9 @@ let now = new Date()
 
 // Times on which the intermezzos are planned
 // Format: hours, minutes, seconds, milliseconds
-let intermezzoNoon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 13, 17, 0, 0) - now
-let intermezzo2PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15, 23, 0, 0) - now
-let intermezzo4PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0, 0, 0) - now
+let intermezzoNoon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15, 5, 0, 0) - now
+let intermezzo2PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15, 10, 0, 0) - now
+let intermezzo4PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15, 12, 0, 0) - now
 
 // After the intermezzo, set the timer for the next day
 if (intermezzoNoon <= 0) {

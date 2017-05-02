@@ -15,7 +15,7 @@
 #define PROJECT_SHORT_NAME "ICU"
 #define REQUEST_DELAY 10000
 
-#define API_URL "http://b3012c06.ngrok.io"
+#define API_URL "http://cmi-wot.herokuapp.com"
 #define SERVER_URL "http://oege.ie.hva.nl/~palr001/icu"
 #define CONFIG_SSID "icu"
 

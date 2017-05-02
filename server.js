@@ -23,7 +23,7 @@ let now = new Date()
 // Format: hours, minutes, seconds, milliseconds
 let intermezzoNoon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 13, 17, 0, 0) - now
 let intermezzo2PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15, 23, 0, 0) - now
-let intermezzo4PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0, 0, 0) - now
+let intermezzo4PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 52, 0, 0) - now
 
 // After the intermezzo, set the timer for the next day
 if (intermezzoNoon <= 0) {
@@ -37,9 +37,26 @@ if (intermezzo4PM <= 0) {
 }
 
 // Set the timers
-setTimeout(() => intermezzo = true, intermezzoNoon)
-setTimeout(() => intermezzo = true, intermezzo2PM)
-setTimeout(() => intermezzo = true, intermezzo4PM)
+setTimeout(() => {
+  function callback() {
+    console.log('KLEUR')
+  }
+  fetchColor(callback)
+}, intermezzoNoon)
+
+setTimeout(() => {
+  function callback() {
+    console.log('KLEUR')
+  }
+  fetchColor(callback)
+}, intermezzo2PM)
+
+setTimeout(() => {
+  function callback() {
+    console.log('KLEUR')
+  }
+  fetchColor(callback)
+}, intermezzo4PM)
 
 app.use(express.static(path.join(__dirname, '/public')))
 app.set('views', path.join(__dirname, 'views'))
@@ -119,6 +136,8 @@ function setColor(user) {
       td: user,
       c: newColor
     }
+  }, () => {
+    request(`https://oege.ie.hva.nl/~palr001/icu/api.php?t=sqi&d=E568`)
   })
 }
 

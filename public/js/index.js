@@ -7,7 +7,17 @@
     const users = data.users
     const usersList = document.querySelector('.users ul')
 
-    console.log(users)
+    function generateUserList() {
+      return users.map(user => {
+        return `<li data-id="${user.id}" class="${user.status === '1' ? 'present' : 'not-present'}">${user.name ? user.name : user.id}</li>`
+      }).join('')
+    }
+
+    usersList.innerHTML = generateUserList()
+  })
+
+  socket.on('serverNameChange', users => {
+    const usersList = document.querySelector('.users ul')
 
     function generateUserList() {
       return users.map(user => {

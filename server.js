@@ -105,6 +105,8 @@ io.on('connection', socket => {
         user.name = data.name
       }
     })
+
+    socket.emit('serverNameChange', users)
   })
 })
 

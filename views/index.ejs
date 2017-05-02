@@ -37,7 +37,7 @@
     <section class="users">
       <ul>
         <% users.forEach(user => { %>
-          <li class="<%= user.status === '1' ? 'present' : 'not-present' %>"><%= user.name ? `${user.name} (${user.id})` : user.id %></li>
+          <li data-id="<%= user.id %>" class="<%= user.status === '1' ? 'present' : 'not-present' %>"><%= user.name ? `${user.name} (${user.id})` : user.id %></li>
         <% }) %>
       </ul>
     </section>

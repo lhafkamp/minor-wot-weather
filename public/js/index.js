@@ -11,7 +11,7 @@
 
     function generateUserList() {
       return users.map(user => {
-        return `<li class="${user.status === '1' ? 'present' : 'not-present'}">${user.name ? user.name : user.id}</li>`
+        return `<li data-id="${user.id}" class="${user.status === '1' ? 'present' : 'not-present'}">${user.name ? user.name : user.id}</li>`
       }).join('')
     }
 
@@ -21,7 +21,7 @@
   document.addEventListener('click', e => {
     if (e.target.classList.contains('present') || e.target.classList.contains('not-present')) {
       const el = e.target
-      const id = e.target.innerHTML
+      const id = e.target.getAttribute('data-id')
 
       e.target.innerHTML = '<input type="text" placolder="naam" autofocus>'
 

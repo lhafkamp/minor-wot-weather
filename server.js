@@ -11,7 +11,6 @@ const io = socketio(server)
 const port = process.env.PORT || 2500
 const APIKEY = process.env.API_KEY
 const users = []
-const connections = []
 
 let temp
 let weather
@@ -49,10 +48,10 @@ app.use(express.static('media'))
 // Request weather data from API
 app.get('/', (req, res) => {
   function callback() {
-    res.render('index', {
-      temp,
-      users
+    users.forEach(user => {
+      setColor(user.id)
     })
+    res.render('index', {temp, users, weather: 'clear-day'})
   }
 
   fetchColor(callback)
@@ -90,14 +89,6 @@ app.get('*', (req, res) => {
 
 // Socket.io stuff
 io.on('connection', socket => {
-  connections.push(socket)
-  console.log('Connected: %s sockets connected', connections.length)
-
-  socket.on('disconnect', () => {
-    connections.splice(connections.indexOf(socket), 1)
-    console.log('Disconnected: %s sockets connected', connections.length)
-  })
-
   // When a user changes the name in the view, add it to the correct user in the users array
   socket.on('nameChange', data => {
     users.forEach(user => {
@@ -121,23 +112,19 @@ function setColor(user) {
 }
 
 function fetchColor(callback) {
-  request(`https://api.wunderground.com/api/${APIKEY}/conditions/q/autoip.json`, (error, response, body) => {
+  request(`https://api.darksky.net/forecast/${APIKEY}/52.370216,4.895168?units=si`, (error, response, body) => {
     const data = JSON.parse(body)
-    temp = data.current_observation.temp_c
-    weather = data.current_observation.weather
-
+    temp = data.currently.temperature.toString().split('.')[0]
+    weather = data.currently.weather
     // If the celcius is higher than 18 store orange, else store blue
-    if (temp > 18 && weather !== 'Rain') {
+
+    if (temp > 18 && weather !== 'rain') {
       newColor = 'ffa500'
-    } else if (weather === 'Rain') {
+    } else if (weather === 'rain') {
       newColor = '1fe3ff'
     } else {
       newColor = 'ffffff'
     }
-
-    users.forEach(user => {
-      setColor(user.id)
-    })
 
     callback()
   })

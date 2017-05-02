@@ -14,10 +14,11 @@ const users = []
 const connections = []
 
 let temp
+let weather
 let newColor
 let intermezzo = false
 let now = new Date()
-let intermezzoNoon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0, 0) - now
+let intermezzoNoon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 13, 17, 0, 0) - now
 let intermezzo2PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15, 23, 0, 0) - now
 let intermezzo4PM = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0, 0, 0) - now
 
@@ -87,6 +88,14 @@ io.on('connection', socket => {
     connections.splice(connections.indexOf(socket), 1)
     console.log('Disconnected: %s sockets connected', connections.length)
   })
+
+  socket.on('nameChange', data => {
+    users.forEach(user => {
+      if (user.id === data.id) {
+        user.name = data.name
+      }
+    })
+  })
 })
 
 server.listen(port, () => {
@@ -109,9 +118,16 @@ function fetchColor(callback) {
   request(`https://api.wunderground.com/api/${APIKEY}/conditions/q/autoip.json`, (error, response, body) => {
     const data = JSON.parse(body)
     temp = data.current_observation.temp_c
+    weather = data.current_observation.weather
 
     // If the celcius is higher than 18 store orange, else store blue
-    temp > 18 ? newColor = 'ffa500' : newColor = '1fe3ff'
+    if (temp > 18 && weather !== 'Rain') {
+      newColor = 'ffa500'
+    } else if (weather === 'Rain') {
+      newColor = '1fe3ff'
+    } else {
+      newColor = 'ffffff'
+    }
 
     users.forEach(user => {
       setColor(user.id)

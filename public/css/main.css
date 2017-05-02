@@ -1,0 +1,162 @@
+body {
+    color: #eee;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #E0E1E3;
+}
+.icon-wrapper {
+    width: 120px;
+    height: 100%;
+    background-color: #373B46;
+    border-radius: 7px;
+}
+
+main {
+  box-shadow: -20px 20px 70px -10px #4b4e57;
+  width: 40em;
+  margin: auto;
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 0 7px 7px;
+}
+
+section:nth-of-type(1) {
+  background-color: #eee;
+  padding-left: 1em;
+  border-radius: 7px 7px 0 0;
+}
+section:nth-of-type(2) {
+    box-sizing: border-box;
+    padding: 10px 40px;
+    position: relative;
+    background-color: #1F222A;
+    border-radius: 0 0 7px 7px;
+    border-left: 7em solid #373b46;
+}
+
+h2 {
+  border-bottom: 2px solid #4b4e57;
+  padding-bottom: 1em;
+}
+
+section h1 {
+    color: #1F222A;
+    margin: 0.5em;
+    position: relative;
+    font-size: 2em;
+}
+a.edit {
+    margin-right: 1em;
+    color: #4b4e57;
+    font-size: 0.6em;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: color 0.5s;
+}
+section h1 a.edit:hover {
+    color: #eee;
+}
+section .weather {
+  padding: 40px 0px;
+  padding-top: 0;
+  color: #3D414C;
+  transition: color 0.5s ease;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+section .weather:hover {
+    color: yellow;
+}
+section .weather h3 {
+    display: inline;
+    color: #eee;
+    font-weight: 300;
+    font-size: 6em;
+    margin: 0;
+}
+section .weather h3 span.degree-symbol {
+    display: inline-block;
+    margin: 0px 15px;
+    font-size: 0.6em;
+    vertical-align: top;
+}
+section .weather h3 span.celcius {
+    display: inline-block;
+    margin: 10px 0px 0px 15px;
+    color: #3D414C;
+    font-size: 0.3em;
+    vertical-align: top;
+}
+section ul {
+    padding: 0 !important;
+    margin: 0;
+    margin-bottom: 70px;
+}
+section ul li {
+    display: block;
+    margin-right: 60px;
+    color: #3D414C;
+    font-size: 2em;
+}
+section ul li span {
+    padding-left: 10px;
+    color: #eee;
+    font-size: 0.6em;
+    line-height: 30px;
+    vertical-align: top;
+}
+section .bullets {
+    height: 70px;
+    color: #3D414C;
+    text-align: center;
+}
+section .bullets span {
+    margin-right: 10px;
+    font-size: 0.6em;
+}
+section .bullets span.active {
+    color: #eee;
+    font-size: 0.8em;
+}
+section a {
+    color: #60646e;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: color 0.5s;
+}
+section a:hover {
+    color: #eee;
+}
+section a .external-link {
+    padding-left: 5px;
+    font-size: 0.6em;
+    vertical-align: middle;
+}
+section .status {
+    position: absolute;
+    right: -3em;
+    margin: 0;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+.present {
+  background-color: rgba(58, 210, 88, 0.9);
+}
+
+.absent {
+  background-color: rgba(210, 58, 81, 0.9);
+}
+
+section .users li {
+  position: relative;
+  padding-right: 0.5em;
+  float: none;
+  text-align: right;
+  margin: 0;
+  margin-bottom: 0.5em;
+  color: #eee;
+}

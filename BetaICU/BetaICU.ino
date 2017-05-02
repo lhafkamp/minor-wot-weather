@@ -117,9 +117,6 @@ int oldButtonState = digitalRead(TILT_PIN);
 void loop()
 {
   buttonState = digitalRead(TILT_PIN);
-
-  // set color for the participant strip
-  setUserLeds(255, 255, 0, 2); // yellow
   
   //Check for button press
   if (digitalRead(BUTTON_PIN) == LOW)
@@ -236,9 +233,6 @@ void requestUsers()
     response = http.getString();
     
     setUserLeds(255, 255, 0, response.toInt());  
-
-    Serial.println("DATAAAAA");
-    Serial.println(response);
   }
 
   http.end();
@@ -269,5 +263,4 @@ String generateChipID()
 
   return chipIDString;
 }
-
 

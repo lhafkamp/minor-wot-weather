@@ -52,11 +52,15 @@ void fadeBrightness(uint8_t r, uint8_t g, uint8_t b, float currentBrightness)
 // new strip for counting participants
 //////////////////////////////////////
 
+int oldUsers = 0;
+
 void setUserLeds(short r, short g, short b, int users) {
+    if (oldUsers != users) {
+      setAllUserPixels(0, 0, 0, 0);
+    }
 
+    oldUsers = users;
     Serial.println(users);
-
-    setAllUserPixels(0, 0, 0, 0);
   
     for(uint16_t i = 0; i <= users; i++) {
       userStrip.setPixelColor(i, r, g, b);

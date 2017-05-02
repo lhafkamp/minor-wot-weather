@@ -11,9 +11,9 @@ const io = socketio(server)
 const port = process.env.PORT || 2500
 const APIKEY = process.env.API_KEY
 const users = []
-const connections = []
 
 let temp
+let icon
 let newColor
 let intermezzo = false
 let now = new Date()
@@ -42,10 +42,10 @@ app.use(express.static('media'))
 // Request weather data from API
 app.get('/', (req, res) => {
   function callback() {
-    res.render('index', {
-      temp,
-      users
+    users.forEach(user => {
+      setColor(user.id)
     })
+    res.render('index', {temp, users, icon})
   }
 
   fetchColor(callback)
@@ -79,16 +79,6 @@ app.get('*', (req, res) => {
   res.redirect('/')
 })
 
-io.on('connection', socket => {
-  connections.push(socket)
-  console.log('Connected: %s sockets connected', connections.length)
-
-  socket.on('disconnect', () => {
-    connections.splice(connections.indexOf(socket), 1)
-    console.log('Disconnected: %s sockets connected', connections.length)
-  })
-})
-
 server.listen(port, () => {
   console.log('App is running on http://localhost:' + port)
 })
@@ -106,16 +96,12 @@ function setColor(user) {
 }
 
 function fetchColor(callback) {
-  request(`https://api.wunderground.com/api/${APIKEY}/conditions/q/autoip.json`, (error, response, body) => {
+  request(`https://api.darksky.net/forecast/${APIKEY}/52.370216,4.895168?units=si`, (error, response, body) => {
     const data = JSON.parse(body)
-    temp = data.current_observation.temp_c
-
+    temp = data.currently.temperature.toString().split('.')[0]
+    icon = data.currently.icon
     // If the celcius is higher than 18 store orange, else store blue
     temp > 18 ? newColor = 'ffa500' : newColor = '1fe3ff'
-
-    users.forEach(user => {
-      setColor(user.id)
-    })
 
     callback()
   })

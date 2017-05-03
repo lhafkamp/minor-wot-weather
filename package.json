@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "npm run build && node server.js",
+    "start": "node server.js",
     "build": "mkdir -p public/build && browserify public/js/index.js > public/build/index.bundle.js",
     "watch": "watchify public/js/index.js -o public/build/index.bundle.js -v",
     "expose": "ngrok http 2500"

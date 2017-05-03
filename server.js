@@ -68,7 +68,7 @@ app.get('/', (req, res) => {
     users.forEach(user => {
       setColor(user.id)
     })
-    res.render('index', {temp, users, weather: 'clear-day'})
+    res.render('index', {temp, users, weather})
   }
 
   fetchColor(callback)
@@ -136,7 +136,7 @@ function fetchColor(callback) {
   request(`https://api.darksky.net/forecast/${APIKEY}/52.370216,4.895168?units=si`, (error, response, body) => {
     const data = JSON.parse(body)
     temp = data.currently.temperature.toString().split('.')[0]
-    weather = data.currently.weather
+    weather = data.currently.icon
     // If the celcius is higher than 18 store orange, else store blue
 
     if (temp > 18 && weather !== 'rain') {

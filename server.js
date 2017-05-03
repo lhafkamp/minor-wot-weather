@@ -83,10 +83,6 @@ app.get('/users', (req, res) => {
   res.send((activeUsers.length - 1).toString())
 })
 
-// app.get('*', (req, res) => {
-//   res.redirect('/')
-// })
-
 // Socket.io stuff
 io.on('connection', socket => {
   // When a user changes the name in the view, add it to the correct user in the users array

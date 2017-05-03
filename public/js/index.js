@@ -11,7 +11,21 @@
 
     function generateUserList() {
       return users.map(user => {
-        return `<li data-id="${user.id}"><a href="#" class="edit">edit</a>${user.name ? user.name : user.id} <span class="status ${user.status === '1' ? 'present' : 'not-present'}""></span></li>`
+        return `<li data-id="${user.id}"><a href="#" class="edit">edit</a><span class="username">${user.name ? user.name : user.id}</span><span class="status ${user.status === '1' ? 'present' : 'absent'}""></span></li>`
+      }).join('')
+    }
+
+    usersList.innerHTML = generateUserList()
+  })
+
+  socket.on('serverNameChange', users => {
+    const usersList = document.querySelector('.users')
+
+    console.log(users)
+
+    function generateUserList() {
+      return users.map(user => {
+        return `<li data-id="${user.id}"><a href="#" class="edit">edit</a><span class="username">${user.name ? user.name : user.id}</span><span class="status ${user.status === '1' ? 'present' : 'absent'}""></span></li>`
       }).join('')
     }
 
@@ -19,13 +33,16 @@
   })
 
   document.addEventListener('click', e => {
-    if (e.target.classList.contains('present') || e.target.classList.contains('absent')) {
+    console.log(e)
+    if (e.target.classList.contains('edit')) {
+      e.preventDefault()
+
       const el = e.target
-      const id = e.target.getAttribute('data-id')
+      const id = e.target.parentNode.getAttribute('data-id')
 
-      e.target.innerHTML = '<input type="text" placolder="naam" autofocus>'
+      e.target.nextElementSibling.innerHTML = '<input type="text" placolder="naam" autofocus>'
 
-      e.target.addEventListener('keypress', e => {
+      e.target.nextElementSibling.addEventListener('keypress', e => {
         const key = e.which || e.keyCode
         if (key === 13) { // 13 is enter
           const name = e.target.value
@@ -35,7 +52,7 @@
             name
           })
 
-          name === '' ? el.innerHTML = id : el.innerHTML = `${name} (${id})`
+          name === '' ? el.nextElementSibling.innerHTML = id : el.nextElementSibling.innerHTML = `${name} (${id})`
         }
       })
     }

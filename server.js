@@ -83,9 +83,9 @@ app.get('/users', (req, res) => {
   res.send((activeUsers.length - 1).toString())
 })
 
-app.get('*', (req, res) => {
-  res.redirect('/')
-})
+// app.get('*', (req, res) => {
+//   res.redirect('/')
+// })
 
 // Socket.io stuff
 io.on('connection', socket => {

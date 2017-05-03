@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="50%" src="media/impression.jpg" alt="impression of the online app working together with the NodeMCU">
+  <img width="50%" src="media/demo.jpg" alt="impression of the online app working together with the NodeMCU">
   <br>
   <br>
   minor-wot-weather
@@ -12,15 +12,15 @@ But changing wheather can leave the students in doubt whether to participate or 
 ## How it works
 **1. Express server**
 
-The server request the current temperture from [Wunderground](https://api.wunderground.com) and shows it in the view. If the the temperture is below 18 degrees celcius the view will have a rainy theme, if above, it will look sunny.
+The server request the current weather from [Darksky](https://darksky.net/dev/) and shows it in the view. Darksky also sends the current weather in words, something like 'rain' or 'clear-day'. Based on each response, the view will have a different animation. The current temperature will also be shown. The start of each intermezzo is fixed and automated, when it is time the server sends a message to all connected users.
 
 **2. Arduino**
 
-The Arduino setup consists of a box made of a led strip, an Arduino with WiFi, and a button. The Arduino is configured with the express server and API.
+Every user will have a box containing a LED strip, a NodeMCU, and a tilt sensor. When the box recieves the intermezzo signal, the LED inside the box will give an indication of the weather and the LED tower shows the number of participants. Using the tilt sensor the user can make a choice whether to participate or not by flipping the box to one side or another.
 
 **3. API**
 
-The API picks up any button presses and will send a response to all the connected devices which will turn on the LED. The color of the LED depends on the current weather, blue means colder, red means warmer.
+The API picks up any button presses and will send a response to all the connected devices which will turn on the LED. The color of the LED depends on the current weather, blue means colder, red means warmer, flickering blue means rain.
 
 
 ## Team

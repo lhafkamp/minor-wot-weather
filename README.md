@@ -16,11 +16,12 @@ The server request the current weather from [Darksky](https://darksky.net/dev/) 
 
 **2. Arduino**
 
+Every user will have a box containing a LED strip, a NodeMCU, and a tilt sensor. When the box recieves the intermezzo signal, the LED inside the box will give an indication of the weather and the LED tower shows the number of participants. Using the tilt sensor the user can make a choice whether to participate or not by flipping the box to one side or another.
+
 <img width="50%" src="media/demo2.jpg" alt="tower">
 <br>
 <br>
-Every user will have a box containing a LED strip, a NodeMCU, and a tilt sensor. When the box recieves the intermezzo signal, the LED inside the box will give an indication of the weather and the LED tower shows the number of participants. Using the tilt sensor the user can make a choice whether to participate or not by flipping the box to one side or another.
-<br>
+
 **3. API**
 
 The API picks up any button presses and will send a response to all the connected devices which will turn on the LED. The color of the LED depends on the current weather, blue means colder, red means warmer, flickering blue means rain.

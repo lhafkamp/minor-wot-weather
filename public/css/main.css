@@ -100,6 +100,19 @@ section ul li {
     color: #3D414C;
     font-size: 2em;
 }
+section ul li .username {
+    font-size: 1em;
+    line-height: normal;
+}
+
+section ul li input {
+  background: transparent;
+  border: none;
+  font-size: 1em;
+  width: 5em;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
 section ul li span {
     padding-left: 10px;
     color: #eee;

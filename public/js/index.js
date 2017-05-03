@@ -9,7 +9,7 @@
 
     function generateUserList() {
       return users.map(user => {
-        return `<li data-id="${user.id}" class="${user.status === '1' ? 'present' : 'not-present'}">${user.name ? user.name : user.id}</li>`
+        return `<li data-id="${user.id}" class="${user.status === '1' ? 'present' : 'absent'}">${user.name ? user.name : user.id}</li>`
       }).join('')
     }
 
@@ -21,7 +21,7 @@
 
     function generateUserList() {
       return users.map(user => {
-        return `<li data-id="${user.id}"><a href="#" class="edit">edit</a>${user.name ? user.name : user.id} <span class="status ${user.status === '1' ? 'present' : 'not-present'}""></span></li>`
+        return `<li data-id="${user.id}"><a href="#" class="edit">edit</a>${user.name ? user.name : user.id} <span class="status ${user.status === '1' ? 'present' : 'absent'}""></span></li>`
       }).join('')
     }
 

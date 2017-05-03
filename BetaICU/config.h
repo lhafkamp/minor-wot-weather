@@ -13,7 +13,7 @@
 #define FADEOUT_DELAY 8
 
 #define PROJECT_SHORT_NAME "ICU"
-#define REQUEST_DELAY 10000
+#define REQUEST_DELAY 2000
 
 #define API_URL "http://cmi-wot.herokuapp.com"
 #define SERVER_URL "http://oege.ie.hva.nl/~palr001/icu"
